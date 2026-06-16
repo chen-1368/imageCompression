@@ -15,40 +15,55 @@
 
     <!-- 主体内容 -->
     <main class="app-main">
-      <div class="main-layout">
-        <!-- 左侧控制面板 -->
-        <aside class="control-panel">
+      <!-- 初始状态：上传组件居中 -->
+      <div v-if="!sourceFile" class="upload-center">
+        <div class="upload-wrap">
           <ImageUploader v-model="sourceFile" @update:modelValue="handleFileChange" />
+        </div>
+      </div>
 
-          <div class="panel-group" v-if="sourceFile">
+      <!-- 上传图片后的布局 -->
+      <div v-else class="content-flow">
+        <!-- 第一行：上传 + 压缩 -->
+        <div class="row row-upload">
+          <div class="uploader-col">
+            <ImageUploader v-model="sourceFile" @update:modelValue="handleFileChange" />
+          </div>
+          <div class="compress-col">
             <CompressionPanel :is-compressing="isCompressing" :can-compress="!!sourceFile" @compress="handleCompress" />
+          </div>
+        </div>
 
+        <!-- 第二行：尺寸+格式 | 图片信息+下载 -->
+        <div class="row row-settings">
+          <div class="settings-group">
             <ResizePanel :original-width="originalDimensions.width" :original-height="originalDimensions.height"
               @update:width="(v) => (targetWidth = v)" @update:height="(v) => (targetHeight = v)" @reset="resetSize" />
-
             <FormatConverter :original-format="originalFormat" @update:format="(v) => (outputFormat = v)" />
-
+          </div>
+          <div class="info-col">
             <ImageInfo :file-name="sourceFile?.name ?? ''" :original-width="originalDimensions.width"
               :original-height="originalDimensions.height" :original-size="sourceFile?.size ?? 0"
               :compressed="compressResult" />
-
-            <el-button v-if="compressResult" type="success" size="large" class="download-btn" @click="handleDownload">
+            <el-button type="success" size="large" class="download-btn" :disabled="!compressResult"
+              @click="handleDownload">
               <el-icon :size="18" class="download-btn-icon">
                 <Download />
               </el-icon>
               <span>下载压缩后的图片</span>
             </el-button>
           </div>
-        </aside>
+        </div>
 
-        <!-- 右侧预览区 -->
-        <section class="preview-area">
+        <!-- 对比模块：压缩后才显示 -->
+        <section v-if="compressResult" class="preview-area">
           <PreviewCompare :original-url="originalPreviewUrl" :compressed-url="compressResult?.url ?? ''"
             :original-width="originalDimensions.width" :original-height="originalDimensions.height"
             :original-size="sourceFile?.size ?? 0"
             :original-format="originalFormat ? getFormatLabel(originalFormat) : ''"
             :compressed-width="compressResult?.width ?? 0" :compressed-height="compressResult?.height ?? 0"
-            :compressed-size="compressResult?.compressedSize ?? 0" :compressed-format="getFormatLabel(outputFormat)" />
+            :compressed-size="compressResult?.compressedSize ?? 0"
+            :compressed-format="getFormatLabel(outputFormat)" />
         </section>
       </div>
     </main>
@@ -136,7 +151,9 @@ async function handleCompress(quality: number) {
   if (result) {
     compressResult.value = result
     ElMessage.success(
-      `压缩完成！${result.compressionRatio > 0 ? '节省 ' + result.compressionRatio.toFixed(1) + '%' : '文件大小有所增加'}`
+      result.compressionRatio > 0
+        ? `压缩完成！节省 ${result.compressionRatio.toFixed(1)}%`
+        : `压缩完成，文件增大了 ${Math.abs(result.compressionRatio).toFixed(1)}%`
     )
   }
 }
@@ -205,25 +222,63 @@ onUnmounted(() => {
   padding: 24px;
 }
 
-.main-layout {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 24px;
-  align-items: start;
+// 初始上传居中
+.upload-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+
+  .upload-wrap {
+    width: 520px;
+    max-width: 100%;
+  }
 }
 
-.control-panel {
+// 上传后的流式布局
+.content-flow {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  position: sticky;
-  top: 24px;
+  gap: 20px;
 }
 
-.panel-group {
+.row {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+// 第一行：上传 + 压缩
+.row-upload {
+  align-items: stretch;
+
+  .uploader-col {
+    flex: 1 1 320px;
+    min-width: 280px;
+    display: flex;
+  }
+
+  .compress-col {
+    flex: 1 1 300px;
+    min-width: 260px;
+    display: flex;
+  }
+}
+
+// 第二行：设置组 + 图片信息
+.row-settings {
+  .settings-group {
+    flex: 1 1 320px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-col {
+    flex: 1 1 300px;
+    min-width: 260px;
+  }
 }
 
 .download-btn {
@@ -231,14 +286,14 @@ onUnmounted(() => {
   height: 48px;
   font-size: 15px;
   border-radius: 10px;
+  margin-top: 16px;
 
   .download-btn-icon {
-    margin-right: 4px;
+    margin-right: 8px;
   }
 }
 
 .preview-area {
-  min-height: 400px;
   background: #fff;
   border-radius: 12px;
   padding: 24px;
@@ -246,13 +301,10 @@ onUnmounted(() => {
 }
 
 // 响应式
-@media (max-width: 900px) {
-  .main-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .control-panel {
-    position: static;
+@media (max-width: 700px) {
+  .row-upload,
+  .row-settings {
+    flex-direction: column;
   }
 
   .app-header .header-content {

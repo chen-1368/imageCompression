@@ -62,6 +62,9 @@ function handleCompress() {
   border-radius: 12px;
   padding: 20px;
   border: 1px solid #ebeef5;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .panel-header {
@@ -76,6 +79,7 @@ function handleCompress() {
 
 .quality-section {
   margin-bottom: 20px;
+  flex: 1;
 
   .quality-label {
     display: flex;
@@ -108,7 +112,7 @@ function handleCompress() {
   border-radius: 8px;
 
   .compress-btn-icon {
-    margin-right: 4px;
+    margin-right: 8px;
   }
 }
 </style>

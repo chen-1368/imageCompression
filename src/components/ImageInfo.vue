@@ -35,7 +35,8 @@
         <div class="info-item">
           <span class="label">压缩率</span>
           <span class="value ratio" :class="compressed.compressionRatio > 0 ? 'good' : 'bad'">
-            {{ compressed.compressionRatio > 0 ? '-' : '+' }}{{ Math.abs(compressed.compressionRatio).toFixed(1) }}%
+            <template v-if="compressed.compressionRatio > 0">-{{ compressed.compressionRatio.toFixed(1) }}%</template>
+            <template v-else>+{{ Math.abs(compressed.compressionRatio).toFixed(1) }}%</template>
           </span>
         </div>
       </div>

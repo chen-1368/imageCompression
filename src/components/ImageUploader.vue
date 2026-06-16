@@ -92,6 +92,7 @@ function handleDrop(e: DragEvent) {
 <style lang="scss" scoped>
 .image-uploader {
   width: 100%;
+  height: 100%;
   min-height: 280px;
   border: 2px dashed #dcdfe6;
   border-radius: 12px;

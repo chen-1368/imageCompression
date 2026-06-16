@@ -95,7 +95,7 @@ export function useImageCompress() {
         height,
         originalSize,
         compressedSize,
-        compressionRatio: Math.max(0, compressionRatio)
+        compressionRatio
       }
     } catch (e: any) {
       error.value = e.message || '压缩过程中出现错误'
