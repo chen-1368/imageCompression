@@ -21,10 +21,10 @@
 
     <el-button type="primary" size="large" :loading="isCompressing" :disabled="!canCompress" class="compress-btn"
       @click="handleCompress">
-      <el-icon v-if="!isCompressing">
+      <el-icon v-if="!isCompressing" :size="18" class="compress-btn-icon">
         <PictureFilled />
       </el-icon>
-      {{ isCompressing ? '压缩中...' : '开始压缩' }}
+      <span>{{ isCompressing ? '压缩中...' : '开始压缩' }}</span>
     </el-button>
   </div>
 </template>
@@ -106,5 +106,9 @@ function handleCompress() {
   height: 44px;
   font-size: 15px;
   border-radius: 8px;
+
+  .compress-btn-icon {
+    margin-right: 4px;
+  }
 }
 </style>

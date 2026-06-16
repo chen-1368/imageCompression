@@ -4,7 +4,9 @@
     <header class="app-header">
       <div class="header-content">
         <div class="logo">
-          <el-icon :size="28" color="#409eff"><PictureFilled /></el-icon>
+          <el-icon :size="28" color="#409eff">
+            <PictureFilled />
+          </el-icon>
           <h1>在线图片压缩工具</h1>
         </div>
         <p class="header-desc">纯浏览器端处理，图片不会上传到服务器</p>
@@ -19,58 +21,32 @@
           <ImageUploader v-model="sourceFile" @update:modelValue="handleFileChange" />
 
           <div class="panel-group" v-if="sourceFile">
-            <CompressionPanel
-              :is-compressing="isCompressing"
-              :can-compress="!!sourceFile"
-              @compress="handleCompress"
-            />
+            <CompressionPanel :is-compressing="isCompressing" :can-compress="!!sourceFile" @compress="handleCompress" />
 
-            <ResizePanel
-              :original-width="originalDimensions.width"
-              :original-height="originalDimensions.height"
-              @update:width="(v) => (targetWidth = v)"
-              @update:height="(v) => (targetHeight = v)"
-              @reset="resetSize"
-            />
+            <ResizePanel :original-width="originalDimensions.width" :original-height="originalDimensions.height"
+              @update:width="(v) => (targetWidth = v)" @update:height="(v) => (targetHeight = v)" @reset="resetSize" />
 
-            <FormatConverter
-              :original-format="originalFormat"
-              @update:format="(v) => (outputFormat = v)"
-            />
+            <FormatConverter :original-format="originalFormat" @update:format="(v) => (outputFormat = v)" />
 
-            <ImageInfo
-              :file-name="sourceFile?.name ?? ''"
-              :original-width="originalDimensions.width"
-              :original-height="originalDimensions.height"
-              :original-size="sourceFile?.size ?? 0"
-              :compressed="compressResult"
-            />
+            <ImageInfo :file-name="sourceFile?.name ?? ''" :original-width="originalDimensions.width"
+              :original-height="originalDimensions.height" :original-size="sourceFile?.size ?? 0"
+              :compressed="compressResult" />
 
-            <el-button
-              v-if="compressResult"
-              type="success"
-              size="large"
-              class="download-btn"
-              @click="handleDownload"
-            >
-              <el-icon><Download /></el-icon>
-              下载压缩图片
+            <el-button v-if="compressResult" type="success" size="large" class="download-btn" @click="handleDownload">
+              <el-icon :size="18" class="download-btn-icon">
+                <Download />
+              </el-icon>
+              <span>下载压缩后的图片</span>
             </el-button>
           </div>
         </aside>
 
         <!-- 右侧预览区 -->
         <section class="preview-area">
-          <PreviewCompare
-            :original-url="originalPreviewUrl"
-            :compressed-url="compressResult?.url ?? ''"
-            :original-width="originalDimensions.width"
-            :original-height="originalDimensions.height"
-            :original-size="sourceFile?.size ?? 0"
-            :compressed-width="compressResult?.width ?? 0"
-            :compressed-height="compressResult?.height ?? 0"
-            :compressed-size="compressResult?.compressedSize ?? 0"
-          />
+          <PreviewCompare :original-url="originalPreviewUrl" :compressed-url="compressResult?.url ?? ''"
+            :original-width="originalDimensions.width" :original-height="originalDimensions.height"
+            :original-size="sourceFile?.size ?? 0" :compressed-width="compressResult?.width ?? 0"
+            :compressed-height="compressResult?.height ?? 0" :compressed-size="compressResult?.compressedSize ?? 0" />
         </section>
       </div>
     </main>
@@ -253,6 +229,10 @@ onUnmounted(() => {
   height: 48px;
   font-size: 15px;
   border-radius: 10px;
+
+  .download-btn-icon {
+    margin-right: 4px;
+  }
 }
 
 .preview-area {
