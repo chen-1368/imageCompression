@@ -45,8 +45,10 @@
         <section class="preview-area">
           <PreviewCompare :original-url="originalPreviewUrl" :compressed-url="compressResult?.url ?? ''"
             :original-width="originalDimensions.width" :original-height="originalDimensions.height"
-            :original-size="sourceFile?.size ?? 0" :compressed-width="compressResult?.width ?? 0"
-            :compressed-height="compressResult?.height ?? 0" :compressed-size="compressResult?.compressedSize ?? 0" />
+            :original-size="sourceFile?.size ?? 0"
+            :original-format="originalFormat ? getFormatLabel(originalFormat) : ''"
+            :compressed-width="compressResult?.width ?? 0" :compressed-height="compressResult?.height ?? 0"
+            :compressed-size="compressResult?.compressedSize ?? 0" :compressed-format="getFormatLabel(outputFormat)" />
         </section>
       </div>
     </main>
@@ -67,7 +69,7 @@ import { useImageCompress, type CompressResult } from './composables/useImageCom
 import { useFormatConvert, type OutputFormat } from './composables/useFormatConvert'
 
 const { compress, isCompressing } = useImageCompress()
-const { detectFormat, getFormatExt } = useFormatConvert()
+const { detectFormat, getFormatExt, getFormatLabel } = useFormatConvert()
 
 // 状态
 const sourceFile = ref<File | null>(null)

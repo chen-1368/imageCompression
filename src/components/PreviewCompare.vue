@@ -17,7 +17,7 @@
           <img :src="originalUrl" alt="original" />
         </div>
         <div class="compare-meta">
-          <span>{{ originalWidth }} x {{ originalHeight }}</span>
+          <span>{{ originalWidth }} x {{ originalHeight }} · {{ originalFormat }}</span>
           <span>{{ formatSize(originalSize) }}</span>
         </div>
       </div>
@@ -27,28 +27,26 @@
           <img :src="compressedUrl" alt="compressed" />
         </div>
         <div class="compare-meta">
-          <span>{{ compressedWidth }} x {{ compressedHeight }}</span>
+          <span>{{ compressedWidth }} x {{ compressedHeight }} · {{ compressedFormat }}</span>
           <span>{{ formatSize(compressedSize) }}</span>
         </div>
       </div>
     </div>
 
     <!-- 滑块对比模式 -->
-    <div
-      v-else
-      class="slider-compare"
-      ref="sliderContainerRef"
-      @mousedown="startDrag"
-      @touchstart="startDrag"
-    >
+    <div v-else class="slider-compare" ref="sliderContainerRef" @mousedown="startDrag" @touchstart="startDrag">
       <img :src="compressedUrl" alt="compressed" class="slider-bg" />
       <div class="slider-clip" :style="{ width: sliderPosition + '%' }">
         <img :src="originalUrl" alt="original" class="slider-fg" />
       </div>
       <div class="slider-line" :style="{ left: sliderPosition + '%' }">
         <div class="slider-handle">
-          <el-icon><ArrowLeft /></el-icon>
-          <el-icon><ArrowRight /></el-icon>
+          <el-icon>
+            <ArrowLeft />
+          </el-icon>
+          <el-icon>
+            <ArrowRight />
+          </el-icon>
         </div>
       </div>
       <div class="slider-labels">
@@ -74,9 +72,11 @@ defineProps<{
   originalWidth: number
   originalHeight: number
   originalSize: number
+  originalFormat: string
   compressedWidth: number
   compressedHeight: number
   compressedSize: number
+  compressedFormat: string
 }>()
 
 const mode = ref<'side' | 'slider'>('side')
