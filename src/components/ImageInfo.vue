@@ -1,7 +1,9 @@
 <template>
   <div class="image-info" v-if="hasInfo">
     <div class="panel-header">
-      <el-icon><InfoFilled /></el-icon>
+      <el-icon>
+        <InfoFilled />
+      </el-icon>
       <span>图片信息</span>
     </div>
 
@@ -69,64 +71,85 @@ function formatSize(bytes: number): string {
 <style lang="scss" scoped>
 .image-info {
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid #ebeef5;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  flex: 1;
 }
 
 .panel-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #303133;
-  margin-bottom: 16px;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 
 .info-section {
   h4 {
-    font-size: 13px;
-    color: #909399;
-    font-weight: 500;
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #f0f2f5;
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f1f5f9;
   }
 
   .info-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 0;
+    padding: 5px 0;
 
     .label {
       font-size: 12px;
-      color: #909399;
+      color: #94a3b8;
+      font-weight: 500;
     }
 
     .value {
       font-size: 13px;
-      color: #303133;
-      font-weight: 500;
+      color: #1e293b;
+      font-weight: 600;
     }
 
     .text-ellipsis {
-      max-width: 100px;
+      max-width: 110px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .ratio {
-      &.good { color: #67c23a; }
-      &.bad { color: #f56c6c; }
+      font-weight: 700;
+      font-size: 14px;
+
+      &.good {
+        color: #22c55e;
+        background: #f0fdf4;
+        padding: 2px 8px;
+        border-radius: 6px;
+      }
+
+      &.bad {
+        color: #ef4444;
+        background: #fef2f2;
+        padding: 2px 8px;
+        border-radius: 6px;
+      }
     }
   }
 }

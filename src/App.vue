@@ -176,19 +176,21 @@ onUnmounted(() => {
 .app-container {
   width: 100%;
   min-height: 100vh;
-  background: #f5f7fa;
+  background: #f0f2f5;
 }
 
 .app-header {
-  background: #fff;
-  border-bottom: 1px solid #ebeef5;
-  padding: 20px 0;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  padding: 0;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
   .header-content {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 18px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -196,34 +198,36 @@ onUnmounted(() => {
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
-      color: inherit;
+      color: #fff;
 
       .logo-icon {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
       }
 
       h1 {
-        font-size: 20px;
+        font-size: 19px;
         font-weight: 700;
-        color: #303133;
+        color: #fff;
         margin: 0;
+        letter-spacing: -0.3px;
       }
     }
 
     .header-desc {
       font-size: 13px;
-      color: #909399;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 400;
     }
   }
 }
 
 .app-main {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 32px;
 }
 
 // 初始上传居中
@@ -231,10 +235,10 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  min-height: 55vh;
 
   .upload-wrap {
-    width: 520px;
+    width: 560px;
     max-width: 100%;
   }
 }
@@ -243,13 +247,13 @@ onUnmounted(() => {
 .content-flow {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 24px;
 }
 
 // 第一行：上传 + 压缩
@@ -257,7 +261,7 @@ onUnmounted(() => {
   align-items: stretch;
 
   .uploader-col {
-    flex: 1 1 320px;
+    flex: 1 1 340px;
     min-width: 280px;
     display: flex;
   }
@@ -271,26 +275,33 @@ onUnmounted(() => {
 
 // 第二行：设置组 + 图片信息
 .row-settings {
+  align-items: stretch;
+
   .settings-group {
-    flex: 1 1 320px;
+    flex: 1 1 340px;
     min-width: 280px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
   }
 
   .info-col {
     flex: 1 1 300px;
     min-width: 260px;
+    display: flex;
+    flex-direction: column;
   }
 }
 
 .download-btn {
   width: 100%;
-  height: 48px;
+  height: 50px;
   font-size: 15px;
-  border-radius: 10px;
-  margin-top: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-top: 20px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
 
   .download-btn-icon {
     margin-right: 8px;
@@ -299,9 +310,10 @@ onUnmounted(() => {
 
 .preview-area {
   background: #fff;
-  border-radius: 12px;
-  padding: 24px;
-  border: 1px solid #ebeef5;
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 // 响应式
@@ -315,7 +327,12 @@ onUnmounted(() => {
   .app-header .header-content {
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+    gap: 6px;
+    padding: 16px 20px;
+  }
+
+  .app-main {
+    padding: 20px;
   }
 }
 </style>

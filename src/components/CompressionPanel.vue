@@ -59,9 +59,10 @@ function handleCompress() {
 <style lang="scss" scoped>
 .compression-panel {
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid #ebeef5;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -70,29 +71,33 @@ function handleCompress() {
 .panel-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #303133;
-  margin-bottom: 20px;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .quality-section {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   flex: 1;
 
   .quality-label {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     font-size: 14px;
-    color: #606266;
+    color: #475569;
+    font-weight: 500;
 
     .quality-value {
-      font-size: 18px;
-      font-weight: 700;
-      color: #409eff;
+      font-size: 22px;
+      font-weight: 800;
+      color: #3b82f6;
+      letter-spacing: -0.5px;
     }
   }
 
@@ -100,16 +105,21 @@ function handleCompress() {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    color: #909399;
-    margin-top: 30px;
+    color: #94a3b8;
+    margin-top: 32px;
   }
 }
 
 .compress-btn {
   width: 100%;
-  height: 44px;
+  height: 48px;
   font-size: 15px;
-  border-radius: 8px;
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  transition: all 0.2s ease;
 
   .compress-btn-icon {
     margin-right: 8px;

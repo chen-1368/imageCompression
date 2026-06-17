@@ -1,22 +1,14 @@
 <template>
-  <div
-    class="image-uploader"
-    :class="{ 'is-dragover': isDragover, 'has-image': !!modelValue }"
-    @dragover.prevent="isDragover = true"
-    @dragleave="isDragover = false"
-    @drop.prevent="handleDrop"
-    @click="triggerInput"
-  >
-    <input
-      ref="inputRef"
-      type="file"
-      accept="image/jpeg,image/png,image/webp,image/bmp"
-      class="file-input"
-      @change="handleFileChange"
-    />
+  <div class="image-uploader" :class="{ 'is-dragover': isDragover, 'has-image': !!modelValue }"
+    @dragover.prevent="isDragover = true" @dragleave="isDragover = false" @drop.prevent="handleDrop"
+    @click="triggerInput">
+    <input ref="inputRef" type="file" accept="image/jpeg,image/png,image/webp,image/bmp" class="file-input"
+      @change="handleFileChange" />
 
     <div v-if="!modelValue" class="upload-placeholder">
-      <el-icon :size="64" color="#409eff"><UploadFilled /></el-icon>
+      <el-icon :size="64" color="#3b82f6">
+        <UploadFilled />
+      </el-icon>
       <p class="upload-title">拖拽图片到此处或点击上传</p>
       <p class="upload-hint">支持 JPG / PNG / WebP / BMP，最大 20MB</p>
     </div>
@@ -24,7 +16,9 @@
     <div v-else class="upload-preview">
       <img :src="previewUrl" alt="preview" class="preview-img" />
       <div class="preview-overlay">
-        <el-icon :size="32"><RefreshRight /></el-icon>
+        <el-icon :size="32">
+          <RefreshRight />
+        </el-icon>
         <span>点击更换图片</span>
       </div>
     </div>
@@ -94,33 +88,37 @@ function handleDrop(e: DragEvent) {
   width: 100%;
   height: 100%;
   min-height: 280px;
-  border: 2px dashed #dcdfe6;
-  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   overflow: hidden;
   position: relative;
-  background: #fafafa;
+  background: #f8fafc;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 
   &:hover {
-    border-color: #409eff;
-    background: #f0f7ff;
+    border-color: #3b82f6;
+    background: #eff6ff;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.12);
   }
 
   &.is-dragover {
-    border-color: #409eff;
-    background: #ecf5ff;
+    border-color: #3b82f6;
+    background: #dbeafe;
     transform: scale(1.01);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
   }
 
   &.has-image {
     min-height: 200px;
     border-style: solid;
-    border-color: #e4e7ed;
+    border-color: #e2e8f0;
     background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   }
 }
 
@@ -130,19 +128,19 @@ function handleDrop(e: DragEvent) {
 
 .upload-placeholder {
   text-align: center;
-  padding: 40px 20px;
+  padding: 40px 24px;
 
   .upload-title {
-    margin-top: 16px;
+    margin-top: 18px;
     font-size: 16px;
-    color: #606266;
-    font-weight: 500;
+    color: #334155;
+    font-weight: 600;
   }
 
   .upload-hint {
     margin-top: 8px;
     font-size: 13px;
-    color: #909399;
+    color: #94a3b8;
   }
 }
 
@@ -154,19 +152,20 @@ function handleDrop(e: DragEvent) {
   justify-content: center;
   position: relative;
   min-height: 200px;
-  padding: 12px;
+  padding: 16px;
 
   .preview-img {
     max-width: 100%;
-    max-height: 300px;
+    max-height: 320px;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 10px;
   }
 
   .preview-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(2px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -174,9 +173,10 @@ function handleDrop(e: DragEvent) {
     gap: 8px;
     color: #fff;
     font-size: 15px;
+    font-weight: 500;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: 10px;
+    transition: opacity 0.25s ease;
+    border-radius: 12px;
   }
 
   &:hover .preview-overlay {

@@ -1,7 +1,9 @@
 <template>
   <div class="format-converter">
     <div class="panel-header">
-      <el-icon><Document /></el-icon>
+      <el-icon>
+        <Document />
+      </el-icon>
       <span>输出格式</span>
     </div>
 
@@ -11,19 +13,9 @@
         <el-tag size="small" type="info">{{ getFormatLabel(originalFormat) }}</el-tag>
       </div>
 
-      <el-select
-        v-model="selectedFormat"
-        placeholder="选择输出格式"
-        size="default"
-        class="format-select"
-        @change="handleChange"
-      >
-        <el-option
-          v-for="opt in FORMAT_OPTIONS"
-          :key="opt.value"
-          :label="opt.label"
-          :value="opt.value"
-        >
+      <el-select v-model="selectedFormat" placeholder="选择输出格式" size="default" class="format-select"
+        @change="handleChange">
+        <el-option v-for="opt in FORMAT_OPTIONS" :key="opt.value" :label="opt.label" :value="opt.value">
           <div class="format-option">
             <span>{{ opt.label }}</span>
             <span class="format-ext">{{ opt.ext }}</span>
@@ -66,31 +58,35 @@ function handleChange(val: OutputFormat) {
 <style lang="scss" scoped>
 .format-converter {
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid #ebeef5;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .panel-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #303133;
-  margin-bottom: 16px;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .format-content {
   .current-format {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 14px;
 
     .format-label {
       font-size: 13px;
-      color: #909399;
+      color: #94a3b8;
+      font-weight: 500;
     }
   }
 
@@ -105,7 +101,7 @@ function handleChange(val: OutputFormat) {
   width: 100%;
 
   .format-ext {
-    color: #909399;
+    color: #94a3b8;
     font-size: 13px;
   }
 }

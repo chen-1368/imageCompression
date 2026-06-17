@@ -1,7 +1,9 @@
 <template>
   <div class="resize-panel">
     <div class="panel-header">
-      <el-icon><Crop /></el-icon>
+      <el-icon>
+        <Crop />
+      </el-icon>
       <span>尺寸调整</span>
     </div>
 
@@ -9,13 +11,7 @@
       <div class="size-input-group">
         <div class="size-input">
           <label>宽度 (px)</label>
-          <el-input-number
-            v-model="resizeWidth"
-            :min="1"
-            :max="10000"
-            size="default"
-            controls-position="right"
-          />
+          <el-input-number v-model="resizeWidth" :min="1" :max="10000" size="default" controls-position="right" />
         </div>
 
         <div class="lock-ratio" @click="lockRatio = !lockRatio">
@@ -29,13 +25,7 @@
 
         <div class="size-input">
           <label>高度 (px)</label>
-          <el-input-number
-            v-model="resizeHeight"
-            :min="1"
-            :max="10000"
-            size="default"
-            controls-position="right"
-          />
+          <el-input-number v-model="resizeHeight" :min="1" :max="10000" size="default" controls-position="right" />
         </div>
       </div>
 
@@ -114,26 +104,29 @@ function resetToOriginal() {
 <style lang="scss" scoped>
 .resize-panel {
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid #ebeef5;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .panel-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #303133;
-  margin-bottom: 16px;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .resize-form {
   .size-input-group {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 
     .size-input {
       flex: 1;
@@ -141,8 +134,11 @@ function resetToOriginal() {
       label {
         display: block;
         font-size: 12px;
-        color: #909399;
+        color: #94a3b8;
+        font-weight: 500;
         margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
 
       :deep(.el-input-number) {
@@ -151,18 +147,21 @@ function resetToOriginal() {
     }
 
     .lock-ratio {
-      margin-top: 18px;
+      margin-top: 20px;
       cursor: pointer;
-      padding: 6px;
-      border-radius: 6px;
+      padding: 8px;
+      border-radius: 8px;
       transition: all 0.2s;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
 
       &:hover {
-        background: #f0f2f5;
+        background: #eff6ff;
+        border-color: #bfdbfe;
       }
 
       .is-locked {
-        color: #409eff;
+        color: #3b82f6;
       }
     }
   }
@@ -171,11 +170,13 @@ function resetToOriginal() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 12px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #f1f5f9;
 
     .original-info {
       font-size: 12px;
-      color: #909399;
+      color: #94a3b8;
     }
   }
 }
