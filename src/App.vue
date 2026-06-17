@@ -3,12 +3,10 @@
     <!-- 顶部导航 -->
     <header class="app-header">
       <div class="header-content">
-        <div class="logo">
-          <el-icon :size="28" color="#409eff">
-            <PictureFilled />
-          </el-icon>
+        <a href="/" class="logo">
+          <img src="/favicon.svg" alt="logo" class="logo-icon" />
           <h1>在线图片压缩工具</h1>
-        </div>
+        </a>
         <p class="header-desc">纯浏览器端处理，图片不会上传到服务器</p>
       </div>
     </header>
@@ -56,14 +54,13 @@
         </div>
 
         <!-- 对比模块：压缩后才显示 -->
-        <section v-if="compressResult" class="preview-area">
+        <section v-show="compressResult" class="preview-area">
           <PreviewCompare :original-url="originalPreviewUrl" :compressed-url="compressResult?.url ?? ''"
             :original-width="originalDimensions.width" :original-height="originalDimensions.height"
             :original-size="sourceFile?.size ?? 0"
             :original-format="originalFormat ? getFormatLabel(originalFormat) : ''"
             :compressed-width="compressResult?.width ?? 0" :compressed-height="compressResult?.height ?? 0"
-            :compressed-size="compressResult?.compressedSize ?? 0"
-            :compressed-format="getFormatLabel(outputFormat)" />
+            :compressed-size="compressResult?.compressedSize ?? 0" :compressed-format="getFormatLabel(outputFormat)" />
         </section>
       </div>
     </main>
@@ -73,7 +70,7 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from 'vue'
 import { ElMessage } from 'element-plus'
-import { PictureFilled, Download } from '@element-plus/icons-vue'
+import { Download } from '@element-plus/icons-vue'
 import ImageUploader from './components/ImageUploader.vue'
 import CompressionPanel from './components/CompressionPanel.vue'
 import ResizePanel from './components/ResizePanel.vue'
@@ -185,7 +182,7 @@ onUnmounted(() => {
 .app-header {
   background: #fff;
   border-bottom: 1px solid #ebeef5;
-  padding: 16px 0;
+  padding: 20px 0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 
   .header-content {
@@ -200,6 +197,13 @@ onUnmounted(() => {
       display: flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
+      color: inherit;
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+      }
 
       h1 {
         font-size: 20px;
@@ -302,6 +306,7 @@ onUnmounted(() => {
 
 // 响应式
 @media (max-width: 700px) {
+
   .row-upload,
   .row-settings {
     flex-direction: column;
