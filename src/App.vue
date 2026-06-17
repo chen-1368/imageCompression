@@ -42,7 +42,9 @@
           <div class="info-col">
             <ImageInfo :file-name="sourceFile?.name ?? ''" :original-width="originalDimensions.width"
               :original-height="originalDimensions.height" :original-size="sourceFile?.size ?? 0"
-              :compressed="compressResult" />
+              :original-format="originalFormat ? getFormatLabel(originalFormat) : ''"
+              :compressed="compressResult"
+              :compressed-format="getFormatLabel(outputFormat)" />
             <el-button type="success" size="large" class="download-btn" :disabled="!compressResult"
               @click="handleDownload">
               <el-icon :size="18" class="download-btn-icon">

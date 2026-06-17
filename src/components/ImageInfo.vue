@@ -19,6 +19,10 @@
           <span class="value">{{ originalWidth }} x {{ originalHeight }}</span>
         </div>
         <div class="info-item">
+          <span class="label">格式</span>
+          <span class="value">{{ originalFormat }}</span>
+        </div>
+        <div class="info-item">
           <span class="label">大小</span>
           <span class="value">{{ formatSize(originalSize) }}</span>
         </div>
@@ -29,6 +33,10 @@
         <div class="info-item">
           <span class="label">尺寸</span>
           <span class="value">{{ compressed.width }} x {{ compressed.height }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">格式</span>
+          <span class="value">{{ compressedFormat }}</span>
         </div>
         <div class="info-item">
           <span class="label">大小</span>
@@ -56,7 +64,9 @@ const props = defineProps<{
   originalWidth: number
   originalHeight: number
   originalSize: number
+  originalFormat: string
   compressed: CompressResult | null
+  compressedFormat: string
 }>()
 
 const hasInfo = computed(() => !!props.fileName)
